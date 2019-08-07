@@ -4,8 +4,8 @@
 ####CHANGE THESE####
 PATH="/Users/mann/github/triatomes/ross2018_mammalian_skin/" #CHANGE ME to your working directory
 RAW="/Volumes/histolytica/ross2018_mammalian_skin/raw" #CHANGE ME to where your raw fastq files are
-FWPRI="CCTACGGGNBGCASCAG" #CHANGE ME to your forward primer current is 515F Caparoso primers
-RVPRI="GACTACNVGGGTATCTAATCC" #CHANGE ME to your reverse primer current is 806R Caparoso primers
+FWPRI="CCTACGGGNBGCASCAG" #CHANGE ME to your forward primer 
+RVPRI="GACTACNVGGGTATCTAATCC" #CHANGE ME to your reverse primer 
 CUTAD="/usr/local/bin/cutadapt" #CHANGE ME to your cutadapt install (if you don't know where this is try the following command in your terminal: which cutadapt)
 # REFDB="/Users/mann/refDB/silva_for_dada2/v132_for_parfreylab/16s/silva_132.16s.99_rep_set.dada2.fa.gz" #CHANGE ME to your reference database fasta file
 FPAT="_1.fastq" #CHANGE ME to match the pattern in your forward reads
@@ -31,18 +31,11 @@ library(Biostrings)
 library(seqinr)
 
 
-####Get randomly sampled 10 samples per species of interest####
-# cd $PATH
-# rm sra_accession.list
-# grep "Bos taurus" sra_metadata.csv | awk -F"," '{print $8}' | sed 's/"//g' | gshuf | head -n10 >> sra_accession.list
-# grep "Canis familiaris" sra_metadata.csv | awk -F"," '{print $8}' | sed 's/"//g' | gshuf | head -n10 >> sra_accession.list
-# grep "Felis catus" sra_metadata.csv | awk -F"," '{print $8}' | sed 's/"//g' | gshuf | head -n10 >> sra_accession.list
-# grep "Sciurus carolinensis" sra_metadata.csv | awk -F"," '{print $8}' | sed 's/"//g' | gshuf | head -n10 >> sra_accession.list
-# ~/sratoolkit.2.9.6-1-mac64/bin/prefetch --option-file sra_accession.list
-# mv /Users/mann/ncbi/public/sra/*sra /Volumes/histolytica/ross2018_mammalian_skin/raw/
+#download data from sra
+# ~/sratoolkit.2.9.6-1-mac64/bin/prefetch --option-file query.txt
 # cd $RAW
 # ~/sratoolkit.2.9.6-1-mac64/bin/fastq-dump -split-files *sra
-# rm *sra 
+# rm *sra
 
 ####Environment Setup####
 theme_set(theme_bw())
@@ -134,7 +127,7 @@ filtRs <- file.path(path.cut, "filtered", basename(cutRs))
 
 ####trim & filter####
 # quality scores dip at 5' and 3' end of forward and reverse reads, trim 10bp and 50bp from ends 
-out <- filterAndTrim(cutFs, filtFs, cutRs, filtRs, trimLeft=10, trimRight=50, minLen = c(150,120),
+out <- filterAndTrim(cutFs, filtFs, cutRs, filtRs, trimLeft=10, trimRight=10, minLen = c(150,120),
                      maxN=c(0,0), maxEE=c(8,10), truncQ=c(2,2), rm.phix=TRUE,
                      compress=FALSE, multithread=FALSE)
 retained <- as.data.frame(out)
@@ -220,6 +213,7 @@ track <- cbind(out[samples_to_keep,], sapply(dadaFs[samples_to_keep], getN), sap
 track <- cbind(track, 100-track[,6]/track[,5]*100, 100-track[,7]/track[,6]*100)
 colnames(track) <- c("input", "filtered", "denoisedF", "denoisedR", "merged", "nosingletons", "nochimeras", "percent_singletons", "percent_chimeras")
 rownames(track) <- sample.names[samples_to_keep]
+View(track)
 
 ####save output from sequnce table construction steps####
 write.table(data.frame("row_names"=rownames(track),track),"read_retention.16s.txt", row.names=FALSE, quote=F, sep="\t")
@@ -277,8 +271,8 @@ write.table(data.frame("row_names"=rownames(sequence_taxonomy_table),sequence_ta
 
 #filter out unwanted taxonomic groups
 #system2("grep", args= "-v 'Unassigned' sequence_taxonomy_table.16s.merged.txt | awk '{print $1}' | grep 'A' > wanted.ids")
-wanted <- read.table("wanted.ids", header=F)
-seqtab.filtered <- seqtab.nosingletons.nochim[, which(colnames(seqtab.nosingletons.nochim) %in% wanted$V1)]
+wanted <- read.table("/Users/mann/github/triatomes/ross2018_mammalian_skin/wanted.ids", header=F)
+seqtab.filtered <- seqtab.nochim[, which(colnames(seqtab.nochim) %in% wanted$V1)]
 
 #get representative seq tree
 system2("filter_fasta.py -f rep_set_fix.fa -s wanted.ids -o rep_set.filt.fa")
