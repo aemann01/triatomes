@@ -136,6 +136,23 @@ pdf("figs/philr_pca.pdf")
 fviz_pca_ind(pca, habillage=merge$cluster, geom="point", addEllipses=T, ellipse.type="convex", pointshape=19, point.size=1, mean.point=F) + labs(title="PhIRL Distance") + scale_color_brewer(palette="Dark2") + theme_minimal() + xlim(-50,50) + ylim(-50,50)
 dev.off()
 
+# PCA for supplemental figure
+pdf("figs/philr_bloodmeal_pca.pdf")
+fviz_pca_ind(pca, habillage=merge$Blood_meal, geom="point", addEllipses=T, ellipse.type="convex", pointshape=19, point.size=1, mean.point=F) + labs(title="PhIRL Distance") + scale_color_brewer(palette="Dark2") + theme_minimal() + xlim(-50,50) + ylim(-50,50)
+dev.off()
+
+pdf("figs/philr_machres1_pca.pdf")
+fviz_pca_ind(pca, habillage=merge$MachRes1, geom="point", addEllipses=T, ellipse.type="convex", pointshape=19, point.size=1, mean.point=F) + labs(title="PhIRL Distance") + scale_color_brewer(palette="Dark2") + theme_minimal() + xlim(-50,50) + ylim(-50,50)
+dev.off()
+
+pdf("figs/philr_sex_pca.pdf")
+fviz_pca_ind(pca, habillage=merge$Sex, geom="point", addEllipses=T, ellipse.type="convex", pointshape=19, point.size=1, mean.point=F) + labs(title="PhIRL Distance") + scale_color_brewer(palette="Dark2") + theme_minimal() + xlim(-50,50) + ylim(-50,50)
+dev.off()
+
+pdf("figs/philr_straintype_pca.pdf")
+fviz_pca_ind(pca, habillage=merge$Strain_type, geom="point", addEllipses=T, ellipse.type="convex", pointshape=19, point.size=1, mean.point=F) + labs(title="PhIRL Distance") + scale_color_brewer(palette="Dark2") + theme_minimal() + xlim(-50,50) + ylim(-50,50)
+dev.off()
+
 ############
 #Upset plot
 ############
@@ -166,8 +183,9 @@ ggplot(datmelt, aes(fill=datmelt$taxonomy, x=datmelt$variable, y=datmelt$value))
 dev.off()
 
 #########
-#Adonis
+#Adonis 
 #########
+# is there a difference in microbial diversity across samples by some metadata category?
 metadata <- as(sample_data(ps.dat), "data.frame")
 adonis(philr.dist ~ Sex, data=metadata)
 # Call:
@@ -241,7 +259,7 @@ OTUTable <- as.matrix(t(seqtab.filtered))
 filt.list <- colnames(OTUTable)
 filtmap <- rawmetadata[rawmetadata$SampleID %in% filt.list,]
 filtmap <- filtmap[match(filt.list, filtmap$SampleID),]
-x <- as.factor(filtmap$MachRes1)
+x <- as.factor(filtmap$MachRes1) # CHANGE ME to your variable of interest
 tree <- phy_tree(philr.dat)
 tax <- read.table("assigntax/rep_set_tax_assignments_phylofactor.txt", sep="\t", header=T)
 common.otus <- which(rowSums(OTUTable>0)>10)
@@ -249,8 +267,10 @@ OTUTable <- OTUTable[common.otus,]
 tree <- ape::drop.tip(tree, setdiff(tree$tip.label, rownames(OTUTable)))
 PF <- PhyloFactor(OTUTable, tree, x, nfactors=3)
 PF$Data <- PF$Data[PF$tree$tip.label,]
-gtree <- pf.tree(PF)
-gtree$ggplot + geom_tiplab(aes(angle=angle))
+gtree <- pf.tree(PF,layout="rectangular")
+pdf("figs/phylofactor_tree.pdf")
+gtree$ggplot + geom_tiplab()
+dev.off()
 
 y <- t(PF$basis[,1]) %*% log(PF$Data)
 dat <- as.data.frame(cbind(as.matrix(PF$X), (t(y))))
@@ -259,6 +279,14 @@ pdf("figs/factor1_boxp.pdf")
 ggplot(dat, aes(x=dat$V1, y=dat$V2)) + geom_boxplot(fill=gtree$legend$colors[1]) + theme_classic() + ylab("ILR abundance") + xlab("") + ggtitle('Factor 1')
 dev.off()
 
+wilcox.test(dat[dat$V1 == "Negative",]$V2, dat[dat$V1 == "Positive",]$V2)
+
+# 	Wilcoxon rank sum test with continuity correction
+
+# data:  dat[dat$V1 == "Negative", ]$V2 and dat[dat$V1 == "Positive", ]$V2
+# W = 553, p-value = 0.01745
+# alternative hypothesis: true location shift is not equal to 0
+
 y <- t(PF$basis[,2]) %*% log(PF$Data)
 dat <- as.data.frame(cbind(as.matrix(PF$X), (t(y))))
 dat$V2 <- as.numeric(as.character(dat$V2))
@@ -266,12 +294,28 @@ pdf("figs/factor2_boxp.pdf")
 ggplot(dat, aes(x=dat$V1, y=dat$V2)) + geom_boxplot(fill=gtree$legend$colors[2]) + theme_classic() + ylab("ILR abundance") + xlab("") + ggtitle('Factor2')
 dev.off()
 
+wilcox.test(dat[dat$V1 == "Negative",]$V2, dat[dat$V1 == "Positive",]$V2)
+
+# 	Wilcoxon rank sum test with continuity correction
+
+# data:  dat[dat$V1 == "Negative", ]$V2 and dat[dat$V1 == "Positive", ]$V2
+# W = 569, p-value = 0.02599
+# alternative hypothesis: true location shift is not equal to 0
+
 y <- t(PF$basis[,3]) %*% log(PF$Data)
 dat <- as.data.frame(cbind(as.matrix(PF$X), (t(y))))
 dat$V2 <- as.numeric(as.character(dat$V2))
 pdf("figs/factor3_boxp.pdf")
 ggplot(dat, aes(x=dat$V1, y=dat$V2)) + geom_boxplot(fill=gtree$legend$colors[3]) + theme_classic() + ylab("ILR abundance") + xlab("") + ggtitle('Factor3')
 dev.off()
+
+wilcox.test(dat[dat$V1 == "Negative",]$V2, dat[dat$V1 == "Positive",]$V2)
+
+# 	Wilcoxon rank sum test with continuity correction
+
+# data:  dat[dat$V1 == "Negative", ]$V2 and dat[dat$V1 == "Positive", ]$V2
+# W = 545, p-value = 0.01419
+# alternative hypothesis: true location shift is not equal to 0
 
 PF$factors
 #                               Group1                       Group2      ExpVar
