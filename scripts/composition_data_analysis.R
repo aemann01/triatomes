@@ -174,7 +174,7 @@ dev.off()
 ####################
 #Taxonomy barchart
 ####################
-orderlist <- hc$labels
+orderlist <- as.vector(dend_data$labels$label)
 dat <- read.table("collapsed_simplified_taxonomy_for_plot.txt", header=T, sep="\t")
 datmelt <- melt(dat)
 datmelt$variable <- factor(datmelt$variable, levels=orderlist)

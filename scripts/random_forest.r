@@ -68,7 +68,7 @@ rf.significance(x=rf_species, xdata=otu_table_scaled_var[,1:(ncol(otu_table_scal
 # 	 min random within class error: NA
 # 	 max random within class error:  NA
 
-#try with only the two most common species, randomly sample each so that they == n=20
+#try with only the two most common species, randomly sample each so that they == n=15
 otu_table_ger <- subset(otu_table_scaled_var, var=="gerstaeckeri")
 otu_table_san <- subset(otu_table_scaled_var, var=="sanguisuga")
 #randomly sample 20 rows
