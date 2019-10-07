@@ -25,6 +25,7 @@ library(dendextend)
 library(phangorn)
 library(vegan)
 library(factoextra)
+library(ranacapa)
 
 PATH="/Users/mann/github/triatomes"
 
@@ -185,5 +186,5 @@ dev.off()
 #RAREFACTION CURVE PLOT
 ########################
 pdf("figs/rarefaction_curve.pdf")
-rarecurve(seqtab.filtered, label=FALSE)
+ggrare(ps.dada2_join, color=Sp_by_key) + theme_minimal()
 dev.off()
