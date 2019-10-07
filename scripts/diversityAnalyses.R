@@ -186,5 +186,5 @@ dev.off()
 #RAREFACTION CURVE PLOT
 ########################
 pdf("figs/rarefaction_curve.pdf")
-ggrare(ps.dada2_join, color=Sp_by_key) + theme_minimal()
+ggrare(ps.dada2_join, color="Sp_by_key") + theme_minimal()
 dev.off()

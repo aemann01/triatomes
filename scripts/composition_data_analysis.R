@@ -252,6 +252,27 @@ adonis(philr.dist ~ County, data=metadata)
 # Residuals 55    3553.1  64.601         0.67085
 # Total     82    5296.4                 1.00000
 
+subset_TcI <- metadata[which(metadata$Strain_type == "TcI"),]
+subset_TcIV <- metadata[which(metadata$Strain_type == "TcIV"),]
+submeta <- rbind(subset_TcI, subset_TcIV)
+submat <- as.matrix(philr.dist)
+submat <- submat[rownames(submeta),rownames(submeta)]
+
+adonis(submat ~ Strain_type, data=submeta)
+
+# Call:
+# adonis(formula = submat ~ Strain_type, data = submeta) 
+
+# Permutation: free
+# Number of permutations: 999
+
+# Terms added sequentially (first to last)
+
+#             Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)
+# Strain_type  1     25.46  25.458 0.41833 0.00963  0.757
+# Residuals   43   2616.85  60.857         0.99037       
+# Total       44   2642.31                 1.00000
+
 ##############
 #Phylofactor
 ##############
