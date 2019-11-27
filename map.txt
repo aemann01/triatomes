@@ -1,91 +1,91 @@
-SampleID	Bug_ID	Microbiome_ID	County	State	CollAlive	Sp_by_key	Sex	Life_stage	Days_from_Capture_to_Dissection	Blood_meal	Days_from_Dissection_to_Extraction	Days_from_Capture_to_Extraction	MachRes1	Strain_type	Strain_TcIV	Strain_TcI
-Tri536	PS243	Lect-1-F-unk	Comal	Texas	Alive	lecticularia	F	Adult	46	2	5	51	Negative	NA	NA	NA
-Tri1117	PS707	Sang-M-Neg-Symp-1	Lampasas	Texas	Alive	sanguisuga	M	Adult	33	2	31	64	Negative	NA	NA	NA
-Tri1193	PS783	Gerst-M-Neg-Symp-1	Bexar	Texas	Alive	gerstaeckeri	M	Adult	12	4	15	27	Negative	NA	NA	NA
-Tri1246	SNBL003	Lect-2-M-Neg	Jim_Wells	Texas	Alive	lecticularia	M	Adult	34	1	3	37	Negative	NA	NA	NA
-Tri1247	SNBL004	Gerst-F-Neg-Symp-1	Jim_Wells	Texas	Alive	gerstaeckeri	F	Adult	28	3	120	148	Negative	NA	NA	NA
-Tri1254	SNBL011	Gerst-M-Neg-Symp-3	Jim_Wells	Texas	Alive	gerstaeckeri	M	Adult	13	4	3	16	Negative	NA	NA	NA
-Tri1255	SNBL012	Gerst-F-Neg-Symp-2	Jim_Wells	Texas	Alive	gerstaeckeri	F	Adult	13	4	3	16	Negative	NA	NA	NA
-Tri1256	SNBL013	Gerst-M-Neg-Symp-4	Jim_Wells	Texas	Alive	gerstaeckeri	M	Adult	13	2	3	16	Negative	NA	NA	NA
-Tri1272	PS845	Gerst-M-Neg-Symp-2	Hays	Texas	Alive	gerstaeckeri	M	Adult	15	5	33	48	Negative	NA	NA	NA
-Tri1317	PS887	Gerst-F-Neg-Symp-3	Bandera	Texas	Alive	gerstaeckeri	F	Adult	40	5	6	46	Negative	NA	NA	NA
-Tri1319	PS889	Gerst-M-Neg-Symp-5	Bandera	Texas	Alive	gerstaeckeri	M	Adult	38	3	6	44	Negative	NA	NA	NA
-Tri1324	PS894	Gerst-F-Neg-Symp-4	Bastrop	Texas	Alive	gerstaeckeri	F	Adult	28	1	13	41	Negative	NA	NA	NA
-Tri1398	PS928	Gerst-M-Neg-Symp-6	Kendall	Texas	Alive	gerstaeckeri	M	Adult	19	1	100	119	Negative	NA	NA	NA
-Tri1428	EL001	Gerst-F-Neg-Symp-5	Bexar	Texas	Alive	gerstaeckeri	F	Adult	10	2	39	49	Negative	NA	NA	NA
-Tri1435	EL008	Gerst-F-Neg-Symp-6	Bandera	Texas	Alive	gerstaeckeri	F	Adult	10	3	40	50	Negative	NA	NA	NA
-Tri1512	PS1033	Ind-4-F-Neg	Bandera	Texas	Alive	indictiva	F	Adult	26	3	16	42	Negative	NA	NA	NA
-Tri1536	EL009	Gerst-M-Neg-Symp-7	Bandera	Texas	Alive	gerstaeckeri	M	Adult	13	2	58	71	Negative	NA	NA	NA
-Tri1549	PS1061	Gerst-M-Neg-Symp-8	Fayette	Texas	Alive	gerstaeckeri	M	Adult	24	2	10	34	Negative	NA	NA	NA
-Tri1555	PS1067	Gerst-M-Neg-Symp-9	Milam	Texas	Alive	gerstaeckeri	M	Adult	19	1	10	29	Negative	NA	NA	NA
-Tri1558	PS1070	Gerst-M-Neg-Symp-10	Bandera	Texas	Alive	gerstaeckeri	M	Adult	14	1	9	23	Negative	NA	NA	NA
-Tri1560	PS1072	Gerst-F-Neg-Symp-7	Travis	Texas	Alive	gerstaeckeri	F	Adult	23	1	18	41	Negative	NA	NA	NA
-Tri1580	PS1092	Ind-5-F-Neg	Medina	Texas	Alive	indictiva	F	Adult	58	4	10	68	Negative	NA	NA	NA
-Tri1684	PS1194	Gerst-F-Neg-Symp-8	Fayette	Texas	Alive	gerstaeckeri	F	Adult	16	3	22	38	Negative	NA	NA	NA
-Tri1714	Barnes034	Sang-M-Neg-Symp-2	Uvalde	Texas	Alive	sanguisuga	M	Adult	16	2	36	52	Negative	NA	NA	NA
-Tri1717	Barnes037	Gerst-F-Neg-Symp-9	Uvalde	Texas	Alive	gerstaeckeri	F	Adult	16	2	57	73	Negative	NA	NA	NA
-Tri1718	Barnes038	Pro-2-M-Neg	Uvalde	Texas	Alive	protracta	M	Adult	16	1	57	73	Negative	NA	NA	NA
-Tri1719	Barnes039	Sang-F-Neg-Symp-1	Uvalde	Texas	Alive	sanguisuga	F	Adult	15	2	57	72	Negative	NA	NA	NA
-Tri1838	PS1284	Sang-M-Neg-Symp-4	Fayette	Texas	Alive	sanguisuga	M	Adult	11	1	6	17	Negative	NA	NA	NA
-Tri1839	PS1285	Gerst-F-Neg-Symp-10	Fayette	Texas	Alive	gerstaeckeri	F	Adult	22	3	6	28	Negative	NA	NA	NA
-Tri1896	PS1333	Sang-M-Neg-Symp-5	Refugio	Texas	Alive	sanguisuga	M	Adult	NA	2	11	75	Negative	NA	NA	NA
-Tri2043	PS1445	Sang-F-Neg-Symp-2	Hays	Texas	Alive	sanguisuga	F	Adult	25	4	70	95	Negative	NA	NA	NA
-Tri2086	PS1488	Sang-F-Neg-Symp-3	Bastrop	Texas	Alive	sanguisuga	F	Adult	38	1	18	56	Negative	NA	NA	NA
-Tri2091	AZ82	Sang-F-Neg-Symp-4	Travis	Texas	Alive	sanguisuga	F	Adult	42	4	117	159	Negative	NA	NA	NA
-Tri2092	AZ83	Sang-M-Neg-Symp-3	Travis	Texas	Alive	sanguisuga	M	Adult	35	1	117	152	Negative	NA	NA	NA
-Tri2213	PS1595	Sang-F-Neg-Symp-5	Guadalupe	Texas	Alive	sanguisuga	F	Adult	31	2	100	131	Negative	NA	NA	NA
-Tri277	Barnes023	Ind-1-M-unk	Uvalde	Texas	Alive	indictiva	M	Adult	22	2	19	41	Positive	NoSuccess	NA	NA
-Tri1505	PS1026	Gerst-F-Pos-Symp-9	Bandera	Texas	Alive	gerstaeckeri	F	Adult	21	2	25	46	Positive	NoSuccess	NA	NA
-Tri1851	PS1297	Sang-F-Pos-Symp-5	Bexar	Texas	Alive	sanguisuga	F	Adult	18	2	7	25	Positive	NoSuccess	NA	NA
-Tri1092	PS682	Ind-3-F-Pos	Blanco	Texas	Alive	indictiva	F	Adult	17	2	43	60	Positive	TcI	n	p
-Tri1094	PS684	Gerst-F-Pos-Symp-3	Bastrop	Texas	Alive	gerstaeckeri	F	Adult	25	4	48	73	Positive	TcI	n	p
-Tri1264	PS837	Gerst-M-Pos-Symp-6	Medina	Texas	Alive	gerstaeckeri	M	Adult	12	2	38	50	Positive	TcI	n	p
-Tri1266	PS839	Gerst-F-Pos-Symp-5	Medina	Texas	Alive	gerstaeckeri	F	Adult	12	NA	26	38	Positive	TcI	n	p
-Tri1271	PS844	Gerst-F-Pos-Symp-6	Hays	Texas	Alive	gerstaeckeri	F	Adult	14	2	20	34	Positive	TcI	n	p
-Tri1277	PS850	Gerst-M-Pos-Symp-7	Frio	Texas	Alive	gerstaeckeri	M	Adult	8	5	20	28	Positive	TcI	n	p
-Tri1326	PS896	Gerst-F-Pos-Symp-8	Bastrop	Texas	Alive	gerstaeckeri	F	Adult	28	2	13	41	Positive	TcI	n	p
-Tri1396	PS926	Gerst-M-Pos-Symp-10	Kendall	Texas	Alive	gerstaeckeri	M	Adult	16	4	14	30	Positive	TcI	n	p
-Tri1482	PS1003	Gerst-M-Pos-Symp-11	Hays	Texas	Alive	gerstaeckeri	M	Adult	31	2	28	59	Positive	TcI	n	p
-Tri1492	PS1013	Gerst-M-Pos-Symp-16	Blanco	Texas	Alive	gerstaeckeri	M	Adult	8	3	21	29	Positive	TcI	n	p
-Tri1543	EL016	Gerst-M-Pos-Symp-15	Bandera	Texas	Alive	gerstaeckeri	M	Adult	8	3	71	79	Positive	TcI	n	p
-Tri1548	PS1060	Gerst-F-Pos-Symp-10	Hays	Texas	Alive	gerstaeckeri	F	Adult	33	1	10	43	Positive	TcI	n	p
-Tri1552	PS1064	Gerst-F-Pos-Symp-11	Fayette	Texas	Alive	gerstaeckeri	F	Adult	23	2	17	40	Positive	TcI	n	p
-Tri1578	PS1090	Gerst-F-Pos-Symp-13	Medina	Texas	Alive	gerstaeckeri	F	Adult	58	1	59	117	Positive	TcI	n	p
-Tri1602	PS1114	Gerst-F-Pos-Symp-14	Bexar	Texas	Alive	gerstaeckeri	F	Adult	16	1	3	19	Positive	TcI	n	p
-Tri1637	PS1149	Gerst-F-Pos-Symp-16	Kendall	Texas	Alive	gerstaeckeri	F	Adult	14	1	3	17	Positive	TcI	n	p
-Tri1669	PS1179	Gerst-M-Pos-Symp-19	Bexar	Texas	Alive	gerstaeckeri	M	Adult	20	3	14	34	Positive	TcI	n	p
-Tri1670	PS1180	Gerst-F-Pos-Symp-18	Bexar	Texas	Alive	gerstaeckeri	F	Adult	20	2	14	34	Positive	TcI	n	p
-Tri1674	PS1184	Gerst-F-Pos-Symp-19	Fayette	Texas	Alive	gerstaeckeri	F	Adult	28	1	23	51	Positive	TcI	n	p
-Tri1715	Barnes035	Pro-1-M-Pos	Uvalde	Texas	Alive	protracta	M	Adult	16	1	43	59	Positive	TcI	n	p
-Tri1770	PS1266	Sang-F-Pos-Symp-4	Stephenville_area	Texas	Alive	sanguisuga	F	Adult	25	1	3	28	Positive	TcI	n	p
-Tri1781	PS1277	Gerst-F-Pos-Symp-20	Comal	Texas	Alive	gerstaeckeri	F	Adult	14	2	6	20	Positive	TcI	n	p
-Tri2037	PS1439	Sang-M-Pos-Symp-4	Washington	Texas	Alive	sanguisuga	M	Adult	21	2	3	24	Positive	TcI	n	p
-Tri1103	PS693	Sang-M-Pos-Symp-1	Guadalupe	Texas	Alive	sanguisuga	M	Adult	24	4	43	67	Positive	TcI/TcIV_mixed	p	p
-Tri1223	PS813	Gerst-M-Pos-Symp-5	Bexar	Texas	Alive	gerstaeckeri	M	Adult	30	1	104	134	Positive	TcI/TcIV_mixed	p	p
-Tri1523	PS1044	Gerst-M-Pos-Symp-13	Comal	Texas	Alive	gerstaeckeri	M	Adult	16	1	20	36	Positive	TcI/TcIV_mixed	p	p
-Tri1581	PS1093	Gerst-M-Pos-Symp-17	Medina	Texas	Alive	gerstaeckeri	M	Adult	59	3	9	68	Positive	TcI/TcIV_mixed	p	p
-Tri1676	PS1186	Gerst-F-Pos-Symp-BU1	Goliad	Texas	Alive	gerstaeckeri	F	Adult	22	1	22	44	Positive	TcI/TcIV_mixed	p	p
-Tri2223	PS1605	Gerst-F-Pos-Symp-BU2	Hays	Texas	alive	gerstaeckeri	F	Adult	40	1	74	114	Positive	TcI/TcIV_mixed	p	p
-Tri328	PS046	Gerst-M-Pos-Symp-1	Comal	Texas	Alive	gerstaeckeri	M	Adult	8	2	22	30	Positive	TcIV	p	n
-Tri480	PS187	Gerst-M-Pos-Symp-2	Blanco	Texas	Alive	gerstaeckeri	M	Adult	45	4	26	71	Positive	TcIV	p	n
-Tri535	PS242	Ind-2-M-unk	Comal	Texas	Alive	indictiva	M	Adult	46	4	5	51	Positive	TcIV	p	n
-Tri1097	PS687	Sang-F-Pos-Symp-1	Hamilton	Texas	Alive	sanguisuga	F	Adult	47	1	31	78	Positive	TcIV	p	n
-Tri1201	PS791	Gerst-F-Pos-Symp-4	Bee	Texas	Alive	gerstaeckeri	F	Adult	20	2	37	57	Positive	TcIV	p	n
-Tri1245	SNBL002	Gerst-M-Pos-Symp-3	Jim_Wells	Texas	Alive	gerstaeckeri	M	Adult	46	1	3	49	Positive	TcIV	p	n
-Tri1296	PS866	Gerst-M-Pos-Symp-8	Blanco	Texas	Alive	gerstaeckeri	M	Adult	43	3	100	143	Positive	TcIV	p	n
-Tri1303	PS873	Gerst-F-Pos-Symp-7	Bastrop/Travis	Texas	Alive	gerstaeckeri	F	Adult	40	1	17	57	Positive	TcIV	p	n
-Tri1315	PS885	Gerst-M-Pos-Symp-9	Medina	Texas	Alive	gerstaeckeri	M	Adult	37	4	99	136	Positive	TcIV	p	n
-Tri1415	PS944	Sang-F-Pos-Symp-2	Bell	Texas	Alive	sanguisuga	F	Adult	9	2	12	21	Positive	TcIV	p	n
-Tri1430	EL003	Gerst-M-Pos-Symp-14	Bexar	Texas	Alive	gerstaeckeri	M	Adult	11	1	39	50	Positive	TcIV	p	n
-Tri1506	PS1027	Gerst-M-Pos-Symp-12	Bandera	Texas	Alive	gerstaeckeri	M	Adult	22	2	22	44	Positive	TcIV	p	n
-Tri1559	PS1071	Gerst-F-Pos-Symp-12	Coryell	Texas	Alive	gerstaeckeri	F	Adult	16	1	18	34	Positive	TcIV	p	n
-Tri1626	PS1138	Gerst-F-Pos-Symp-15	Bastrop	Texas	Alive	gerstaeckeri	F	Adult	28	1	8	36	Positive	TcIV	p	n
-Tri1632	PS1144	Gerst-M-Pos-Symp-18	Hays	Texas	Alive	gerstaeckeri	M	Adult	30	1	8	38	Positive	TcIV	p	n
-Tri1641	PS1151	Gerst-F-Pos-Symp-17	Bexar	Texas	Alive	gerstaeckeri	F	Adult	23	4	8	31	Positive	TcIV	p	n
-Tri1651	PS1161	Gerst-M-Pos-Symp-BU1	Gillespie	Texas	Alive	gerstaeckeri	M	Adult	7	1	3	10	Positive	TcIV	p	n
-Tri1682	PS1192	Sang-F-Pos-Symp-3	Fayette	Texas	Alive	sanguisuga	F	Adult	36	2	22	58	Positive	TcIV	p	n
-Tri1712	Barnes032	Gerst-M-Pos-Symp-20	Uvalde	Texas	Alive	gerstaeckeri	M	Adult	19	2	36	55	Positive	TcIV	p	n
-Tri1736	PS1233	Sang-M-Pos-Symp-3	Austin	Texas	Alive	sanguisuga	M	Adult	14	3	21	35	Positive	TcIV	p	n
-Tri1765	PS1261	Ind-6-F-Pos	Blanco	Texas	Alive	indictiva	F	Adult	32	1	4	36	Positive	TcIV	p	n
-Tri1834	PS1280	Sang-M-Pos-Symp-BU	Brazos?	Texas	Alive	sanguisuga	M	Adult	4	1	6	10	Positive	TcIV	p	n
-Tri2088	PS1490	Sang-M-Pos-Symp-5	McLennan	Texas	Alive	sanguisuga	M	Adult	58	1	18	76	Positive	TcIV	p	n
+SampleID	Bug_ID	Microbiome_ID	County	State	CollAlive	Sp_by_key	Sex	SpSex	Life_stage	Days_from_Capture_to_Dissection	Blood_meal	Days_from_Dissection_to_Extraction	Days_from_Capture_to_Extraction	MachRes1	Strain_type	Strain_TcIV	Strain_TcI
+Tri536	PS243	Lect-1-F-unk	Comal	Texas	Alive	lecticularia	F	lecticularia_F	Adult	46	2	5	51	Negative	NA	NA	NA
+Tri1117	PS707	Sang-M-Neg-Symp-1	Lampasas	Texas	Alive	sanguisuga	M	sanguisuga_M	Adult	33	2	31	64	Negative	NA	NA	NA
+Tri1193	PS783	Gerst-M-Neg-Symp-1	Bexar	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	12	4	15	27	Negative	NA	NA	NA
+Tri1246	SNBL003	Lect-2-M-Neg	Jim_Wells	Texas	Alive	lecticularia	M	lecticularia_M	Adult	34	1	3	37	Negative	NA	NA	NA
+Tri1247	SNBL004	Gerst-F-Neg-Symp-1	Jim_Wells	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	28	3	120	148	Negative	NA	NA	NA
+Tri1254	SNBL011	Gerst-M-Neg-Symp-3	Jim_Wells	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	13	4	3	16	Negative	NA	NA	NA
+Tri1255	SNBL012	Gerst-F-Neg-Symp-2	Jim_Wells	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	13	4	3	16	Negative	NA	NA	NA
+Tri1256	SNBL013	Gerst-M-Neg-Symp-4	Jim_Wells	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	13	2	3	16	Negative	NA	NA	NA
+Tri1272	PS845	Gerst-M-Neg-Symp-2	Hays	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	15	5	33	48	Negative	NA	NA	NA
+Tri1317	PS887	Gerst-F-Neg-Symp-3	Bandera	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	40	5	6	46	Negative	NA	NA	NA
+Tri1319	PS889	Gerst-M-Neg-Symp-5	Bandera	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	38	3	6	44	Negative	NA	NA	NA
+Tri1324	PS894	Gerst-F-Neg-Symp-4	Bastrop	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	28	1	13	41	Negative	NA	NA	NA
+Tri1398	PS928	Gerst-M-Neg-Symp-6	Kendall	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	19	1	100	119	Negative	NA	NA	NA
+Tri1428	EL001	Gerst-F-Neg-Symp-5	Bexar	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	10	2	39	49	Negative	NA	NA	NA
+Tri1435	EL008	Gerst-F-Neg-Symp-6	Bandera	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	10	3	40	50	Negative	NA	NA	NA
+Tri1512	PS1033	Ind-4-F-Neg	Bandera	Texas	Alive	indictiva	F	indictiva_F	Adult	26	3	16	42	Negative	NA	NA	NA
+Tri1536	EL009	Gerst-M-Neg-Symp-7	Bandera	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	13	2	58	71	Negative	NA	NA	NA
+Tri1549	PS1061	Gerst-M-Neg-Symp-8	Fayette	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	24	2	10	34	Negative	NA	NA	NA
+Tri1555	PS1067	Gerst-M-Neg-Symp-9	Milam	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	19	1	10	29	Negative	NA	NA	NA
+Tri1558	PS1070	Gerst-M-Neg-Symp-10	Bandera	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	14	1	9	23	Negative	NA	NA	NA
+Tri1560	PS1072	Gerst-F-Neg-Symp-7	Travis	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	23	1	18	41	Negative	NA	NA	NA
+Tri1580	PS1092	Ind-5-F-Neg	Medina	Texas	Alive	indictiva	F	indictiva_F	Adult	58	4	10	68	Negative	NA	NA	NA
+Tri1684	PS1194	Gerst-F-Neg-Symp-8	Fayette	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	16	3	22	38	Negative	NA	NA	NA
+Tri1714	Barnes034	Sang-M-Neg-Symp-2	Uvalde	Texas	Alive	sanguisuga	M	sanguisuga_M	Adult	16	2	36	52	Negative	NA	NA	NA
+Tri1717	Barnes037	Gerst-F-Neg-Symp-9	Uvalde	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	16	2	57	73	Negative	NA	NA	NA
+Tri1718	Barnes038	Pro-2-M-Neg	Uvalde	Texas	Alive	protracta	M	protracta_M	Adult	16	1	57	73	Negative	NA	NA	NA
+Tri1719	Barnes039	Sang-F-Neg-Symp-1	Uvalde	Texas	Alive	sanguisuga	F	sanguisuga_F	Adult	15	2	57	72	Negative	NA	NA	NA
+Tri1838	PS1284	Sang-M-Neg-Symp-4	Fayette	Texas	Alive	sanguisuga	M	sanguisuga_M	Adult	11	1	6	17	Negative	NA	NA	NA
+Tri1839	PS1285	Gerst-F-Neg-Symp-10	Fayette	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	22	3	6	28	Negative	NA	NA	NA
+Tri1896	PS1333	Sang-M-Neg-Symp-5	Refugio	Texas	Alive	sanguisuga	M	sanguisuga_M	Adult	NA	2	11	75	Negative	NA	NA	NA
+Tri2043	PS1445	Sang-F-Neg-Symp-2	Hays	Texas	Alive	sanguisuga	F	sanguisuga_F	Adult	25	4	70	95	Negative	NA	NA	NA
+Tri2086	PS1488	Sang-F-Neg-Symp-3	Bastrop	Texas	Alive	sanguisuga	F	sanguisuga_F	Adult	38	1	18	56	Negative	NA	NA	NA
+Tri2091	AZ82	Sang-F-Neg-Symp-4	Travis	Texas	Alive	sanguisuga	F	sanguisuga_F	Adult	42	4	117	159	Negative	NA	NA	NA
+Tri2092	AZ83	Sang-M-Neg-Symp-3	Travis	Texas	Alive	sanguisuga	M	sanguisuga_M	Adult	35	1	117	152	Negative	NA	NA	NA
+Tri2213	PS1595	Sang-F-Neg-Symp-5	Guadalupe	Texas	Alive	sanguisuga	F	sanguisuga_F	Adult	31	2	100	131	Negative	NA	NA	NA
+Tri277	Barnes023	Ind-1-M-unk	Uvalde	Texas	Alive	indictiva	M	indictiva_M	Adult	22	2	19	41	Positive	NoSuccess	NA	NA
+Tri1505	PS1026	Gerst-F-Pos-Symp-9	Bandera	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	21	2	25	46	Positive	NoSuccess	NA	NA
+Tri1851	PS1297	Sang-F-Pos-Symp-5	Bexar	Texas	Alive	sanguisuga	F	sanguisuga_F	Adult	18	2	7	25	Positive	NoSuccess	NA	NA
+Tri1092	PS682	Ind-3-F-Pos	Blanco	Texas	Alive	indictiva	F	indictiva_F	Adult	17	2	43	60	Positive	TcI	n	p
+Tri1094	PS684	Gerst-F-Pos-Symp-3	Bastrop	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	25	4	48	73	Positive	TcI	n	p
+Tri1264	PS837	Gerst-M-Pos-Symp-6	Medina	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	12	2	38	50	Positive	TcI	n	p
+Tri1266	PS839	Gerst-F-Pos-Symp-5	Medina	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	12	NA	26	38	Positive	TcI	n	p
+Tri1271	PS844	Gerst-F-Pos-Symp-6	Hays	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	14	2	20	34	Positive	TcI	n	p
+Tri1277	PS850	Gerst-M-Pos-Symp-7	Frio	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	8	5	20	28	Positive	TcI	n	p
+Tri1326	PS896	Gerst-F-Pos-Symp-8	Bastrop	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	28	2	13	41	Positive	TcI	n	p
+Tri1396	PS926	Gerst-M-Pos-Symp-10	Kendall	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	16	4	14	30	Positive	TcI	n	p
+Tri1482	PS1003	Gerst-M-Pos-Symp-11	Hays	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	31	2	28	59	Positive	TcI	n	p
+Tri1492	PS1013	Gerst-M-Pos-Symp-16	Blanco	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	8	3	21	29	Positive	TcI	n	p
+Tri1543	EL016	Gerst-M-Pos-Symp-15	Bandera	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	8	3	71	79	Positive	TcI	n	p
+Tri1548	PS1060	Gerst-F-Pos-Symp-10	Hays	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	33	1	10	43	Positive	TcI	n	p
+Tri1552	PS1064	Gerst-F-Pos-Symp-11	Fayette	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	23	2	17	40	Positive	TcI	n	p
+Tri1578	PS1090	Gerst-F-Pos-Symp-13	Medina	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	58	1	59	117	Positive	TcI	n	p
+Tri1602	PS1114	Gerst-F-Pos-Symp-14	Bexar	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	16	1	3	19	Positive	TcI	n	p
+Tri1637	PS1149	Gerst-F-Pos-Symp-16	Kendall	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	14	1	3	17	Positive	TcI	n	p
+Tri1669	PS1179	Gerst-M-Pos-Symp-19	Bexar	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	20	3	14	34	Positive	TcI	n	p
+Tri1670	PS1180	Gerst-F-Pos-Symp-18	Bexar	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	20	2	14	34	Positive	TcI	n	p
+Tri1674	PS1184	Gerst-F-Pos-Symp-19	Fayette	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	28	1	23	51	Positive	TcI	n	p
+Tri1715	Barnes035	Pro-1-M-Pos	Uvalde	Texas	Alive	protracta	M	protracta_M	Adult	16	1	43	59	Positive	TcI	n	p
+Tri1770	PS1266	Sang-F-Pos-Symp-4	Stephenville_area	Texas	Alive	sanguisuga	F	sanguisuga_F	Adult	25	1	3	28	Positive	TcI	n	p
+Tri1781	PS1277	Gerst-F-Pos-Symp-20	Comal	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	14	2	6	20	Positive	TcI	n	p
+Tri2037	PS1439	Sang-M-Pos-Symp-4	Washington	Texas	Alive	sanguisuga	M	sanguisuga_M	Adult	21	2	3	24	Positive	TcI	n	p
+Tri1103	PS693	Sang-M-Pos-Symp-1	Guadalupe	Texas	Alive	sanguisuga	M	sanguisuga_M	Adult	24	4	43	67	Positive	TcI/TcIV_mixed	p	p
+Tri1223	PS813	Gerst-M-Pos-Symp-5	Bexar	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	30	1	104	134	Positive	TcI/TcIV_mixed	p	p
+Tri1523	PS1044	Gerst-M-Pos-Symp-13	Comal	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	16	1	20	36	Positive	TcI/TcIV_mixed	p	p
+Tri1581	PS1093	Gerst-M-Pos-Symp-17	Medina	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	59	3	9	68	Positive	TcI/TcIV_mixed	p	p
+Tri1676	PS1186	Gerst-F-Pos-Symp-BU1	Goliad	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	22	1	22	44	Positive	TcI/TcIV_mixed	p	p
+Tri2223	PS1605	Gerst-F-Pos-Symp-BU2	Hays	Texas	alive	gerstaeckeri	F	gerstaeckeri_F	Adult	40	1	74	114	Positive	TcI/TcIV_mixed	p	p
+Tri328	PS046	Gerst-M-Pos-Symp-1	Comal	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	8	2	22	30	Positive	TcIV	p	n
+Tri480	PS187	Gerst-M-Pos-Symp-2	Blanco	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	45	4	26	71	Positive	TcIV	p	n
+Tri535	PS242	Ind-2-M-unk	Comal	Texas	Alive	indictiva	M	indictiva_M	Adult	46	4	5	51	Positive	TcIV	p	n
+Tri1097	PS687	Sang-F-Pos-Symp-1	Hamilton	Texas	Alive	sanguisuga	F	sanguisuga_F	Adult	47	1	31	78	Positive	TcIV	p	n
+Tri1201	PS791	Gerst-F-Pos-Symp-4	Bee	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	20	2	37	57	Positive	TcIV	p	n
+Tri1245	SNBL002	Gerst-M-Pos-Symp-3	Jim_Wells	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	46	1	3	49	Positive	TcIV	p	n
+Tri1296	PS866	Gerst-M-Pos-Symp-8	Blanco	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	43	3	100	143	Positive	TcIV	p	n
+Tri1303	PS873	Gerst-F-Pos-Symp-7	Bastrop/Travis	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	40	1	17	57	Positive	TcIV	p	n
+Tri1315	PS885	Gerst-M-Pos-Symp-9	Medina	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	37	4	99	136	Positive	TcIV	p	n
+Tri1415	PS944	Sang-F-Pos-Symp-2	Bell	Texas	Alive	sanguisuga	F	sanguisuga_F	Adult	9	2	12	21	Positive	TcIV	p	n
+Tri1430	EL003	Gerst-M-Pos-Symp-14	Bexar	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	11	1	39	50	Positive	TcIV	p	n
+Tri1506	PS1027	Gerst-M-Pos-Symp-12	Bandera	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	22	2	22	44	Positive	TcIV	p	n
+Tri1559	PS1071	Gerst-F-Pos-Symp-12	Coryell	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	16	1	18	34	Positive	TcIV	p	n
+Tri1626	PS1138	Gerst-F-Pos-Symp-15	Bastrop	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	28	1	8	36	Positive	TcIV	p	n
+Tri1632	PS1144	Gerst-M-Pos-Symp-18	Hays	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	30	1	8	38	Positive	TcIV	p	n
+Tri1641	PS1151	Gerst-F-Pos-Symp-17	Bexar	Texas	Alive	gerstaeckeri	F	gerstaeckeri_F	Adult	23	4	8	31	Positive	TcIV	p	n
+Tri1651	PS1161	Gerst-M-Pos-Symp-BU1	Gillespie	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	7	1	3	10	Positive	TcIV	p	n
+Tri1682	PS1192	Sang-F-Pos-Symp-3	Fayette	Texas	Alive	sanguisuga	F	sanguisuga_F	Adult	36	2	22	58	Positive	TcIV	p	n
+Tri1712	Barnes032	Gerst-M-Pos-Symp-20	Uvalde	Texas	Alive	gerstaeckeri	M	gerstaeckeri_M	Adult	19	2	36	55	Positive	TcIV	p	n
+Tri1736	PS1233	Sang-M-Pos-Symp-3	Austin	Texas	Alive	sanguisuga	M	sanguisuga_M	Adult	14	3	21	35	Positive	TcIV	p	n
+Tri1765	PS1261	Ind-6-F-Pos	Blanco	Texas	Alive	indictiva	F	indictiva_F	Adult	32	1	4	36	Positive	TcIV	p	n
+Tri1834	PS1280	Sang-M-Pos-Symp-BU	Brazos?	Texas	Alive	sanguisuga	M	sanguisuga_M	Adult	4	1	6	10	Positive	TcIV	p	n
+Tri2088	PS1490	Sang-M-Pos-Symp-5	McLennan	Texas	Alive	sanguisuga	M	sanguisuga_M	Adult	58	1	18	76	Positive	TcIV	p	n

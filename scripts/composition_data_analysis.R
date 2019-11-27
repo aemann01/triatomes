@@ -37,7 +37,7 @@ seqtab.filtered <- read.table("sequence_table.16s.filtered.txt", header=T, row.n
 taxa <- read.table("assigntax/rep_set_fix_tax_assignments.txt", header=F, sep="\t", row.names=1)
 notinmeta <- setdiff(row.names(seqtab.filtered), rawmetadata$SampleID) #record samples absent in either metadata or OTU table
 notinraw <- setdiff(rawmetadata$SampleID, row.names(seqtab.filtered))
-tree <- read.tree("rep_set.filt.tre") #load representative tree
+tree <- read.tree("rep_set.root.tre") #load representative tree
 
 #clean up rownames in filtered sequence table - ONLY RUN THIS ONCE IF NEEDED
 # new.rownames <- row.names(seqtab.filtered)
@@ -48,55 +48,27 @@ tree <- read.tree("rep_set.filt.tre") #load representative tree
 # rownames(rawmetadata) <- rawmetadata$SampleID 
 # new.samplenames <- paste("Tri", rownames(rawmetadata), sep="") #add character to sample names in metadata file
 # rawmetadata$SampleID <- new.samplenames
-# rownames(rawmetadata) <- rawmetadata$SampleID #set row names as the sample IDs for the metadata
+
+#############
+#FILTER DATA
+#############
+#remove species with insufficient sample size
+rawmetadata <- rawmetadata[rawmetadata$Sp_by_key %in% c("gerstaeckeri", "sanguisuga"),]
+rownames(rawmetadata) <- rawmetadata$SampleID #set row names as the sample IDs for the metadata
+seqtab.filtered <- seqtab.filtered[rownames(seqtab.filtered) %in% rownames(rawmetadata),]
 
 ################
-#NORMALIZE DATA
+#PHILR DISTANCE 
 ################
-#Centered log-ratio transformation
-seqtab.clr <- clr(seqtab.filtered)
-write.table(as.data.frame(seqtab.clr), "sequence_table.16s.clr.txt", quote=F, sep="\t", col.names=NA)
-
-#############################
-#AITCHISON DISTANCE (LINEAR)
-#############################
-# Heirarchical cluster dendrogram
-hc <- hclust(dist(seqtab.clr), method="complete")
-df2 <- data.frame(cluster=cutree(hc,6), states=factor(hc$labels, levels=hc$labels[hc$order])) # get cluster assocaited with each sample
-hcd <- as.dendrogram(hc)
-dend_data <- dendro_data(hcd, type="rectangle")
-p1 <- ggplot(dend_data$segments) + geom_segment(aes(x=x,y=y, xend=xend, yend=yend)) + theme_classic() + geom_text(data = dend_data$labels, aes(x, y, label = label, hjust = 1, angle = 90)) + ylim(-2,30) + xlab("") + ylab("") + theme(axis.text.x=element_blank(), axis.ticks.x=element_blank()) 
-merge <- merge(df2, rawmetadata, by.x=c("states"), by.y=c("SampleID"))
-p2 <- ggplot(merge, aes(states, y=1, fill=factor(merge$cluster))) + geom_tile() + scale_fill_manual(values=cols) + scale_y_continuous(expand=c(0,0)) + theme(axis.title=element_blank(), axis.ticks=element_blank(), axis.text=element_blank(), legend.position="none")
-gp1<-ggplotGrob(p1)
-gp2<-ggplotGrob(p2)
-maxWidth <- grid::unit.pmax(gp1$widths[2:5], gp2$widths[2:5])
-gp1$widths[2:5] <- as.list(maxWidth)
-gp2$widths[2:5] <- as.list(maxWidth)
-pdf("figs/aitchison_dendrogram.pdf")
-grid.arrange(gp1, gp2, ncol=1,heights=c(4/5,1/5,1/5))
-dev.off()
-
-# Biplot
-#have to read back in clr sequence table
-comp <- read.table("sequence_table.16s.clr.txt", header=T, row.names=1)
-pca <- prcomp(as.matrix(comp))
-pdf("figs/aitchison_screeplot.pdf")
-screeplot(pca)
-dev.off()
-pdf("figs/aitchison_pca.pdf")
-fviz_pca_biplot(pca, habillage=merge$cluster, geom="point", addEllipses=T, ellipse.type="convex", pointshape=19, point.size=1, mean.point=F) + labs(title="Aitchison Distance", ylab="PC1 (9.3%)", xlab="PC2 (11.3%)") + scale_color_brewer(palette="Dark2") + theme_minimal() + xlim(-12.5,11.5) + ylim(-12.5,11.5)
-dev.off()
-
-##############################
-#PHILR DISTANCE (PHYLOGENETIC)
-##############################
 #create phyloseq object from "seqtab.filtered", "rawmetadata", "taxa", and "tree"
-tree <- read.tree("rep_set.root.tre")
 ps.dat <- phyloseq(otu_table(seqtab.filtered, taxa_are_rows=FALSE), 
                           sample_data(rawmetadata), 
                           tax_table(as.matrix(taxa[1])), tree)
+#split by species for downstream species specific analyses
+ps.dat.ger <- subset_samples(ps.dat, Sp_by_key=="gerstaeckeri")
+ps.dat.sang <- subset_samples(ps.dat, Sp_by_key=="sanguisuga")
 
+#philr transform for full dataset
 philr.dat <- transform_sample_counts(ps.dat, function(x) x+1) #add pseudocount of one to OTUs to avoid log-ratios involving zeros
 is.rooted(phy_tree(philr.dat)) #check that tree is rooted
 is.binary.tree(phy_tree(philr.dat)) #check that multichotomies are resolved in tree
@@ -107,6 +79,26 @@ metadata <- sample_data(philr.dat)
 tax <- tax_table(philr.dat)
 philr.t <- philr(otu.table, tree, part.weights="enorm.x.gm.counts", ilr.weights="blw.sqrt")
 
+#philr transform gerstaeckeri only
+philr.dat.ger <- transform_sample_counts(ps.dat.ger, function(x) x+1) #add pseudocount of one to OTUs to avoid log-ratios involving zeros
+phy_tree(philr.dat.ger) <- makeNodeLabel(phy_tree(philr.dat.ger), method="number", prefix="n")
+otu.table <- otu_table(philr.dat.ger)
+tree <- phy_tree(philr.dat.ger)
+metadata <- sample_data(philr.dat.ger)
+tax <- tax_table(philr.dat.ger)
+philr.t.ger <- philr(otu.table, tree, part.weights="enorm.x.gm.counts", ilr.weights="blw.sqrt")
+philr.dist.ger <- dist(philr.t.ger, method="euclidean")
+
+#philr transform sanguisuga only
+philr.dat.sang <- transform_sample_counts(ps.dat.sang, function(x) x+1) #add pseudocount of one to OTUs to avoid log-ratios involving zeros
+phy_tree(philr.dat.sang) <- makeNodeLabel(phy_tree(philr.dat.sang), method="number", prefix="n")
+otu.table <- otu_table(philr.dat.sang)
+tree <- phy_tree(philr.dat.sang)
+metadata <- sample_data(philr.dat.sang)
+tax <- tax_table(philr.dat.sang)
+philr.t.sang <- philr(otu.table, tree, part.weights="enorm.x.gm.counts", ilr.weights="blw.sqrt")
+philr.dist.sang <- dist(philr.t.sang, method="euclidean")
+
 # Heirarchical cluster dendrogram
 hc <- hclust(dist(philr.t), method="complete")
 df2 <- data.frame(cluster=cutree(hc,5), states=factor(hc$labels, levels=hc$labels[hc$order])) # get cluster assocaited with each sample
@@ -116,41 +108,42 @@ hcd <- as.dendrogram(hc)
 dend_data <- dendro_data(hcd, type="rectangle")
 p1 <- ggplot(dend_data$segments) + geom_segment(aes(x=x,y=y, xend=xend, yend=yend)) + theme_classic() + geom_text(data = dend_data$labels, aes(x, y, label = label, hjust = 1, angle = 90)) + ylim(-2,30) + xlab("") + ylab("") + theme(axis.text.x=element_blank(), axis.ticks.x=element_blank()) 
 merge <- merge(df2, rawmetadata, by.x=c("states"), by.y=c("SampleID"))
-p2 <- ggplot(merge, aes(states, y=1, fill=factor(merge$cluster))) + geom_tile() + scale_fill_manual(values=cols) + scale_y_continuous(expand=c(0,0)) + theme(axis.title=element_blank(), axis.ticks=element_blank(), axis.text=element_blank(), legend.position="none")
+p2 <- ggplot(merge, aes(states, y=1, fill=factor(merge$SpSex))) + geom_tile() + scale_fill_manual(values=cols) + scale_y_continuous(expand=c(0,0)) + theme(axis.title=element_blank(), axis.ticks=element_blank(), axis.text=element_blank(), legend.position="none")
 gp1<-ggplotGrob(p1)
 gp2<-ggplotGrob(p2)
 maxWidth <- grid::unit.pmax(gp1$widths[2:5], gp2$widths[2:5])
 gp1$widths[2:5] <- as.list(maxWidth)
 gp2$widths[2:5] <- as.list(maxWidth)
-pdf("figs/philr_dendrogram.pdf")
+pdf("figs/philr_dendrogram_spsex.pdf")
 grid.arrange(gp1, gp2, ncol=1,heights=c(4/5,1/5,1/5))
 dev.off()
 
 # PCA
 philr.dist <- dist(philr.t, method="euclidean")
 pca <- prcomp(as.matrix(philr.dist))
+
 pdf("figs/philr_screeplot.pdf")
 screeplot(pca)
 dev.off()
 pdf("figs/philr_pca.pdf")
-fviz_pca_ind(pca, habillage=merge$cluster, geom="point", addEllipses=T, ellipse.type="convex", pointshape=19, point.size=1, mean.point=F) + labs(title="PhIRL Distance") + scale_color_brewer(palette="Dark2") + theme_minimal() + xlim(-50,50) + ylim(-50,50)
+fviz_pca_ind(pca, habillage=merge$Sp_by_key, mean.point=F, label="none", pointsize=3) + labs(title="") + scale_color_brewer(palette="Dark2") + theme_minimal() + xlim(-40,45) + ylim(-40,45)
 dev.off()
 
 # PCA for supplemental figure
 pdf("figs/philr_bloodmeal_pca.pdf")
-fviz_pca_ind(pca, habillage=merge$Blood_meal, geom="point", addEllipses=T, ellipse.type="convex", pointshape=19, point.size=1, mean.point=F) + labs(title="PhIRL Distance") + scale_color_brewer(palette="Dark2") + theme_minimal() + xlim(-50,50) + ylim(-50,50)
+fviz_pca_ind(pca, habillage=merge$Blood_meal, mean.point=F, label="none", pointsize=3) + labs(title="") + scale_color_brewer(palette="Dark2") + theme_minimal() + xlim(-40,45) + ylim(-40,45)
 dev.off()
 
 pdf("figs/philr_machres1_pca.pdf")
-fviz_pca_ind(pca, habillage=merge$MachRes1, geom="point", addEllipses=T, ellipse.type="convex", pointshape=19, point.size=1, mean.point=F) + labs(title="PhIRL Distance") + scale_color_brewer(palette="Dark2") + theme_minimal() + xlim(-50,50) + ylim(-50,50)
+fviz_pca_ind(pca, habillage=merge$MachRes1, mean.point=F, label="none", pointsize=3) + labs(title="") + scale_color_brewer(palette="Dark2") + theme_minimal() + xlim(-40,45) + ylim(-40,45)
 dev.off()
 
 pdf("figs/philr_sex_pca.pdf")
-fviz_pca_ind(pca, habillage=merge$Sex, geom="point", addEllipses=T, ellipse.type="convex", pointshape=19, point.size=1, mean.point=F) + labs(title="PhIRL Distance") + scale_color_brewer(palette="Dark2") + theme_minimal() + xlim(-50,50) + ylim(-50,50)
+fviz_pca_ind(pca, habillage=merge$Sex, mean.point=F, label="none", pointsize=3) + labs(title="") + scale_color_brewer(palette="Dark2") + theme_minimal() + xlim(-40,45) + ylim(-40,45)
 dev.off()
 
 pdf("figs/philr_straintype_pca.pdf")
-fviz_pca_ind(pca, habillage=merge$Strain_type, geom="point", addEllipses=T, ellipse.type="convex", pointshape=19, point.size=1, mean.point=F) + labs(title="PhIRL Distance") + scale_color_brewer(palette="Dark2") + theme_minimal() + xlim(-50,50) + ylim(-50,50)
+fviz_pca_ind(pca, habillage=merge$Strain_type, mean.point=F, label="none", pointsize=3) + labs(title="") + scale_color_brewer(palette="Dark2") + theme_minimal() + xlim(-40,45) + ylim(-40,45)
 dev.off()
 
 ############
@@ -159,13 +152,14 @@ dev.off()
 map <- as.matrix(read.table("map.txt", header=T, sep="\t", row.names=1))
 merged <- merge(seqtab.filtered, map, by="row.names")
 n <- ncol(seqtab.filtered) + 1
-agg <- aggregate(merged[,2:n], by=list(merged$Sp_by_key), FUN=sum)
+agg <- aggregate(merged[,2:n], by=list(merge$Sp_by_key), FUN=sum)
 #remove columns with only zeros
 agg <- agg[,colSums(agg !=0) > 0]
+rownames(agg) <- agg$Group.1
 #convert to presence absence table -- ignore warnining message, still works
 agg[agg>1] <- 1
 #transpose again
-agg <- setNames(data.frame(t(agg[,-1])), agg[,1])
+agg <- data.frame(t(agg[,-1]))
 #upsetR 
 pdf("figs/upset.pdf", onefile=F)
 upset(agg, order.by="freq", mainbar.y.label="Number of ASVs", sets.x.label="Shared ASVs per species", mb.ratio = c(0.55, 0.45))
@@ -175,11 +169,18 @@ dev.off()
 #Taxonomy barchart
 ####################
 orderlist <- as.vector(dend_data$labels$label)
-dat <- read.table("collapsed_simplified_taxonomy_for_plot.txt", header=T, sep="\t")
+dat <- read.table("collapsed_simplified_taxonomy_for_plot.txt", header=T, sep="\t", row.names=1)
+# filter out low sampled bug species
+dat <- dat[,colnames(dat) %in% rownames(rawmetadata)]
+# reset row names
+dat <- cbind(rownames(dat), data.frame(dat, row.names=NULL))
+
 datmelt <- melt(dat)
-datmelt$variable <- factor(datmelt$variable, levels=orderlist)
+colnames(datmelt) <- c("taxonomy", "sampleID", "value")
+
+datmelt$sampleID <- factor(datmelt$sampleID, levels=orderlist)
 pdf("figs/taxonomy_barchart.pdf")
-ggplot(datmelt, aes(fill=datmelt$taxonomy, x=datmelt$variable, y=datmelt$value)) + geom_bar(stat="identity", position="fill") + theme_classic() + theme(axis.text.x=element_text(angle=90))
+ggplot(datmelt, aes(fill=datmelt$taxonomy, x=datmelt$sampleID, y=datmelt$value)) + geom_bar(stat="identity", position="fill") + theme_classic() + theme(axis.text.x=element_text(angle=90))
 dev.off()
 
 #########
@@ -187,6 +188,9 @@ dev.off()
 #########
 # is there a difference in microbial diversity across samples by some metadata category?
 metadata <- as(sample_data(ps.dat), "data.frame")
+metadata.ger <- as(sample_data(ps.dat.ger), "data.frame")
+metadata.sang <- as(sample_data(ps.dat.sang), "data.frame")
+
 adonis(philr.dist ~ Sex, data=metadata)
 # Call:
 # adonis(formula = philr.dist ~ Sex, data = metadata)
@@ -197,11 +201,42 @@ adonis(philr.dist ~ Sex, data=metadata)
 # Terms added sequentially (first to last)
 
 #           Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)
-# Sex        1     141.5 141.452  2.2226 0.02671   0.07 .
-# Residuals 81    5154.9  63.641         0.97329
-# Total     82    5296.4                 1.00000
-# ---
-# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+# Sex        1     121.0 120.994  1.9118 0.02587    0.1
+# Residuals 72    4556.8  63.288         0.97413
+# Total     73    4677.8                 1.00000
+
+#Ger only
+adonis(philr.dist.ger ~ Sex, data=metadata.ger)
+
+# Call:
+# adonis(formula = philr.dist.ger ~ Sex, data = metadata.ger)
+
+# Permutation: free
+# Number of permutations: 999
+
+# Terms added sequentially (first to last)
+
+#           Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)
+# Sex        1      86.5  86.483  1.4273 0.02622  0.212
+# Residuals 53    3211.3  60.590         0.97378
+# Total     54    3297.7                 1.00000
+
+#Sang only
+adonis(philr.dist.sang ~ Sex, data=metadata.sang)
+
+# Call:
+# adonis(formula = philr.dist.sang ~ Sex, data = metadata.sang)
+
+# Permutation: free
+# Number of permutations: 999
+
+# Terms added sequentially (first to last)
+
+#           Df SumsOfSqs MeanSqs F.Model     R2 Pr(>F)
+# Sex        1     142.1  142.13 0.51128 0.0292  0.634
+# Residuals 17    4725.7  277.98         0.9708
+# Total     18    4867.9                 1.0000
+
 
 adonis(philr.dist ~ Sp_by_key, data=metadata)
 
@@ -214,9 +249,9 @@ adonis(philr.dist ~ Sp_by_key, data=metadata)
 # Terms added sequentially (first to last)
 
 #           Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)
-# Sp_by_key  4     510.1 127.535  2.0784 0.09632  0.016 *
-# Residuals 78    4786.3  61.362         0.90368
-# Total     82    5296.4                 1.00000
+# Sp_by_key  1     225.5 225.503  3.6467 0.04821  0.007 **
+# Residuals 72    4452.3  61.837         0.95179
+# Total     73    4677.8                 1.00000
 # ---
 # Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -231,11 +266,43 @@ adonis(philr.dist ~ MachRes1, data=metadata)
 # Terms added sequentially (first to last)
 
 #           Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)
-# MachRes1   1     249.3  249.28  4.0006 0.04707  0.006 **
-# Residuals 81    5047.1   62.31         0.95293
-# Total     82    5296.4                 1.00000
+# MachRes1   1     185.0  184.96  2.9641 0.03954  0.036 *
+# Residuals 72    4492.8   62.40         0.96046
+# Total     73    4677.8                 1.00000
 # ---
 # Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#Ger only
+adonis(philr.dist.ger ~ MachRes1, data=metadata.ger)
+
+# Call:
+# adonis(formula = philr.dist.ger ~ MachRes1, data = metadata.ger)
+
+# Permutation: free
+# Number of permutations: 999
+
+# Terms added sequentially (first to last)
+
+#           Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)
+# MachRes1   1     116.2 116.202  1.9358 0.03524  0.108
+# Residuals 53    3181.5  60.029         0.96476
+# Total     54    3297.7                 1.00000
+
+#Sang only
+adonis(philr.dist.sang ~ MachRes1, data=metadata.sang)
+
+# Call:
+# adonis(formula = philr.dist.sang ~ MachRes1, data = metadata.sang)
+
+# Permutation: free
+# Number of permutations: 999
+
+# Terms added sequentially (first to last)
+
+#           Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)
+# MachRes1   1     575.0  575.00   2.277 0.11812  0.108
+# Residuals 17    4292.9  252.52         0.88188
+# Total     18    4867.9                 1.00000
 
 adonis(philr.dist ~ County, data=metadata)
 
@@ -248,9 +315,9 @@ adonis(philr.dist ~ County, data=metadata)
 # Terms added sequentially (first to last)
 
 #           Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)
-# County    27    1743.3  64.568 0.99948 0.32915  0.496
-# Residuals 55    3553.1  64.601         0.67085
-# Total     82    5296.4                 1.00000
+# County    27    1880.6  69.650  1.1454 0.40202  0.196
+# Residuals 46    2797.2  60.809         0.59798
+# Total     73    4677.8                 1.00000
 
 subset_TcI <- metadata[which(metadata$Strain_type == "TcI"),]
 subset_TcIV <- metadata[which(metadata$Strain_type == "TcIV"),]
@@ -261,7 +328,7 @@ submat <- submat[rownames(submeta),rownames(submeta)]
 adonis(submat ~ Strain_type, data=submeta)
 
 # Call:
-# adonis(formula = submat ~ Strain_type, data = submeta) 
+# adonis(formula = submat ~ Strain_type, data = submeta)
 
 # Permutation: free
 # Number of permutations: 999
@@ -269,9 +336,9 @@ adonis(submat ~ Strain_type, data=submeta)
 # Terms added sequentially (first to last)
 
 #             Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)
-# Strain_type  1     25.46  25.458 0.41833 0.00963  0.757
-# Residuals   43   2616.85  60.857         0.99037       
-# Total       44   2642.31                 1.00000
+# Strain_type  1     57.92  57.916 0.97088 0.13928   0.49
+# Residuals    6    357.92  59.653         0.86072
+# Total        7    415.83                 1.00000
 
 ##############
 #Phylofactor
@@ -297,37 +364,37 @@ y <- t(PF$basis[,1]) %*% log(PF$Data)
 dat <- as.data.frame(cbind(as.matrix(PF$X), (t(y))))
 dat$V2 <- as.numeric(as.character(dat$V2))
 pdf("figs/factor1_boxp.pdf")
-ggplot(dat, aes(x=dat$V1, y=dat$V2)) + geom_boxplot(fill=gtree$legend$colors[1]) + theme_classic() + ylab("ILR abundance") + xlab("") + ggtitle('Factor 1')
+ggplot(dat, aes(x=dat$V1, y=dat$V2)) + geom_boxplot(fill=gtree$legend$colors[1]) + theme_classic() + ylab("ILR abundance") + xlab("") + ggtitle('Factor 1') + ylim(c(-3.5,9.5))
 dev.off()
 
 wilcox.test(dat[dat$V1 == "Negative",]$V2, dat[dat$V1 == "Positive",]$V2)
 
-# 	Wilcoxon rank sum test with continuity correction
+# 	Wilcoxon rank sum test
 
 # data:  dat[dat$V1 == "Negative", ]$V2 and dat[dat$V1 == "Positive", ]$V2
-# W = 553, p-value = 0.01745
+# W = 441, p-value = 0.02957
 # alternative hypothesis: true location shift is not equal to 0
 
 y <- t(PF$basis[,2]) %*% log(PF$Data)
 dat <- as.data.frame(cbind(as.matrix(PF$X), (t(y))))
 dat$V2 <- as.numeric(as.character(dat$V2))
 pdf("figs/factor2_boxp.pdf")
-ggplot(dat, aes(x=dat$V1, y=dat$V2)) + geom_boxplot(fill=gtree$legend$colors[2]) + theme_classic() + ylab("ILR abundance") + xlab("") + ggtitle('Factor2')
+ggplot(dat, aes(x=dat$V1, y=dat$V2)) + geom_boxplot(fill=gtree$legend$colors[2]) + theme_classic() + ylab("ILR abundance") + xlab("") + ggtitle('Factor2') + ylim(c(-3.5,9.5))
 dev.off()
 
 wilcox.test(dat[dat$V1 == "Negative",]$V2, dat[dat$V1 == "Positive",]$V2)
 
-# 	Wilcoxon rank sum test with continuity correction
+# 	Wilcoxon rank sum test
 
 # data:  dat[dat$V1 == "Negative", ]$V2 and dat[dat$V1 == "Positive", ]$V2
-# W = 569, p-value = 0.02599
+# W = 448, p-value = 0.03615
 # alternative hypothesis: true location shift is not equal to 0
 
 y <- t(PF$basis[,3]) %*% log(PF$Data)
 dat <- as.data.frame(cbind(as.matrix(PF$X), (t(y))))
 dat$V2 <- as.numeric(as.character(dat$V2))
 pdf("figs/factor3_boxp.pdf")
-ggplot(dat, aes(x=dat$V1, y=dat$V2)) + geom_boxplot(fill=gtree$legend$colors[3]) + theme_classic() + ylab("ILR abundance") + xlab("") + ggtitle('Factor3')
+ggplot(dat, aes(x=dat$V1, y=dat$V2)) + geom_boxplot(fill=gtree$legend$colors[3]) + theme_classic() + ylab("ILR abundance") + xlab("") + ggtitle('Factor3') + ylim(c(-3.5,9.5))
 dev.off()
 
 wilcox.test(dat[dat$V1 == "Negative",]$V2, dat[dat$V1 == "Positive",]$V2)
@@ -335,15 +402,15 @@ wilcox.test(dat[dat$V1 == "Negative",]$V2, dat[dat$V1 == "Positive",]$V2)
 # 	Wilcoxon rank sum test with continuity correction
 
 # data:  dat[dat$V1 == "Negative", ]$V2 and dat[dat$V1 == "Positive", ]$V2
-# W = 545, p-value = 0.01419
+# W = 812.5, p-value = 0.04625
 # alternative hypothesis: true location shift is not equal to 0
 
 PF$factors
 #                               Group1                       Group2      ExpVar
-# Factor 1 2 member Monophyletic clade 30 member Monophyletic clade 0.006977436
-# Factor 2 3 member Monophyletic clade 27 member Paraphyletic clade 0.006067390
-# Factor 3                         tip 26 member Paraphyletic clade 0.004715486
-#                 F      Pr(>F)
-# Factor 1 7.072276 0.009432920
-# Factor 2 5.632511 0.019998950
-# Factor 3 9.177399 0.003287377
+# Factor 1 2 member Monophyletic clade 25 member Monophyletic clade 0.006195369
+# Factor 2 3 member Monophyletic clade 22 member Paraphyletic clade 0.006766574
+# Factor 3                         tip 21 member Paraphyletic clade 0.003837506
+#                 F     Pr(>F)
+# Factor 1 5.330237 0.02383237
+# Factor 2 4.957810 0.02910193
+# Factor 3 2.866402 0.09476980
