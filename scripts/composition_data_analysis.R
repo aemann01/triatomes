@@ -340,6 +340,32 @@ adonis(submat ~ Strain_type, data=submeta)
 # Residuals    6    357.92  59.653         0.86072
 # Total        7    415.83                 1.00000
 
+#filter out data with no blood meal score
+filt.ps <- subset_samples(ps.dat, SampleID != "Tri1266")
+philr.dat <- transform_sample_counts(filt.ps, function(x) x+1) #add pseudocount of one to OTUs to avoid log-ratios involving zeros
+phy_tree(philr.dat) <- makeNodeLabel(phy_tree(philr.dat), method="number", prefix="n")
+otu.table <- otu_table(philr.dat)
+tree <- phy_tree(philr.dat)
+metadata <- sample_data(philr.dat)
+tax <- tax_table(philr.dat)
+philr.t <- philr(otu.table, tree, part.weights="enorm.x.gm.counts", ilr.weights="blw.sqrt")
+philr.dist <- dist(philr.t, method="euclidean")
+metadata <- as(sample_data(filt.ps), "data.frame")
+adonis(philr.dist ~ Blood_meal, data=metadata)
+
+# Call:
+# adonis(formula = philr.dist ~ Blood_meal, data = metadata)
+
+# Permutation: free
+# Number of permutations: 999
+
+# Terms added sequentially (first to last)
+
+#            Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)
+# Blood_meal  1     100.9  100.88  1.5474 0.02133  0.196
+# Residuals  71    4628.5   65.19         0.97867
+# Total      72    4729.4                 1.00000
+
 ##############
 #Phylofactor
 ##############

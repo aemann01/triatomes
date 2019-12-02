@@ -277,9 +277,10 @@ colnames(sequence_taxonomy_table)[colnames(sequence_taxonomy_table)=="V4"] <- "c
 write.table(data.frame("row_names"=rownames(sequence_taxonomy_table),sequence_taxonomy_table),"sequence_taxonomy_table.16s.merged.txt", row.names=FALSE, quote=F, sep="\t")
 
 #filter out unwanted taxonomic groups
-#system2("grep", args= "-v 'Unassigned' sequence_taxonomy_table.16s.merged.txt | awk '{print $1}' | grep 'A' > wanted.ids")
+system("grep -v 'Unassigned' sequence_taxonomy_table.16s.merged.txt | awk '{print $1}' | grep 'A' > wanted.ids")
 wanted <- read.table("wanted.ids", header=F)
 seqtab.filtered <- seqtab.nosingletons.nochim[, which(colnames(seqtab.nosingletons.nochim) %in% wanted$V1)]
+write.table(as.data.frame(seqtab.filtered), "sequence_table.16s.filtered.txt", row.names=F, quote=F, sep="\t")
 
 #get representative seq tree
 system2("filter_fasta.py -f rep_set_fix.fa -s wanted.ids -o rep_set.filt.fa")
