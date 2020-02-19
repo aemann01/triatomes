@@ -8,7 +8,7 @@ Allison E. Mann, Elizabeth A. Mitchell, Yan Zhang, Rachel Curtis-Robles, Santosh
 | map.txt | Full dataset metadata |
 | sequence_taxonomy_table.16s.merged.txt | Full ASV frequency table |
 
-### Supplementary tables
+## Supplementary tables
 | Table        | Description           |
 | ------------- |:-------------|
 | 1 Metadata | Sample metadata |
