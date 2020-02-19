@@ -2,7 +2,19 @@
 
 Allison E. Mann, Elizabeth A. Mitchell, Yan Zhang, Rachel Curtis-Robles, Santosh Thapa, Sarah A. Hamer, Michael S. Allen.
 
-## Processing scripts
+## Supplementary materials
+| File        | Description           |
+| ------------- |:-------------|
+| map.txt | Full dataset metadata |
+| sequence_taxonomy_table.16s.merged.txt | Full ASV frequency table |
+
+# Supplementary tables
+| Table        | Description           |
+| ------------- |:-------------|
+| 1 Metadata | Sample metadata |
+| 2 ASV table | ASV frequency table per sample |
+| 3 Collapsed taxonomy | ASV frequency table collapsed by taxonomy used for taxonomy barchart |
+| 4 Read stats | DADA2 read processing statistics |
 
 ## Scripts
 
