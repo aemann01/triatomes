@@ -92,3 +92,73 @@ dev.off()
 pdf("figs/rarefaction_curve.pdf")
 ggrare(ps.dada2_join, color="Sp_by_key") + theme_minimal()
 dev.off()
+
+########################
+#ALPHA DIVERSITY PLOT
+########################
+pdf("figs/adiv_spbykey.pdf")
+plot_richness(ps.rare, measures=c("Observed", "Shannon"), x="Sp_by_key") + theme_minimal()
+dev.off()
+
+pdf("figs/adiv_machres1.pdf")
+plot_richness(ps.rare, measures=c("Observed", "Shannon"), x="MachRes1") + theme_minimal()
+dev.off()
+
+pdf("figs/adiv.pdf")
+plot_richness(ps.rare, measures=c("Observed", "Shannon"), x="Sp_by_key", color="MachRes1") + theme_minimal()
+dev.off()
+
+# signficance test
+p <- estimate_richness(ps.rare, measures=c("Observed", "Shannon"))
+d <- sample_data(ps.rare)
+sp_ger <- p[d[,"Sp_by_key"] == "gerstaeckeri",]
+sp_san <- p[d[,"Sp_by_key"] == "sanguisuga",]
+
+wilcox.test(sp_ger$Observed, sp_san$Observed)
+
+# 	Wilcoxon rank sum test with continuity correction
+
+# data:  sp_ger$Observed and sp_san$Observed
+# W = 346.5, p-value = 0.02959
+# alternative hypothesis: true location shift is not equal to 0
+
+#remove T. sanguisuga outlier -- significant still?
+wilcox.test(sp_ger$Observed, sp_san$Observed)
+
+# 	Wilcoxon rank sum test with continuity correction
+
+# data:  sp_ger$Observed and sp_san$Observed
+# W = 346.5, p-value = 0.05772
+# alternative hypothesis: true location shift is not equal to 0
+
+wilcox.test(sp_ger$Shannon, sp_san$Shannon)
+
+# 	Wilcoxon rank sum test with continuity correction
+
+# data:  sp_ger$Shannon and sp_san$Shannon
+# W = 502, p-value = 0.8045
+# alternative hypothesis: true location shift is not equal to 0
+
+cruz_pos <- p[d[,"MachRes1"] == "Positive",]
+cruz_neg <- p[d[,"MachRes1"] == "Negative",]
+
+wilcox.test(cruz_pos$Observed, cruz_neg$Observed)
+
+# 	Wilcoxon rank sum test with continuity correction
+
+# data:  cruz_pos$Observed and cruz_neg$Observed
+# W = 670.5, p-value = 0.6896
+# alternative hypothesis: true location shift is not equal to 0
+
+wilcox.test(cruz_pos$Shannon, cruz_neg$Shannon)
+
+# 	Wilcoxon rank sum test
+
+# data:  cruz_pos$Shannon and cruz_neg$Shannon
+# W = 647, p-value = 0.8935
+# alternative hypothesis: true location shift is not equal to 0
+
+
+
+
+
