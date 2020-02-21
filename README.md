@@ -1,6 +1,6 @@
-# Comparison of the bacterial gut microbiome of North American *Triatoma* spp. with and without *Trypanosoma cruzi*. 2020. Frontiers in Microbiology. In Press
+# Comparison of the bacterial gut microbiome of North American *Triatoma* spp. with and without *Trypanosoma cruzi*
 
-Allison E. Mann, Elizabeth A. Mitchell, Yan Zhang, Rachel Curtis-Robles, Santosh Thapa, Sarah A. Hamer, Michael S. Allen.
+Allison E. Mann, Elizabeth A. Mitchell, Yan Zhang, Rachel Curtis-Robles, Santosh Thapa, Sarah A. Hamer, Michael S. Allen. 2020. Frontiers in Microbiology. In press
 
 ## Supplementary materials
 | File        | Description           |
