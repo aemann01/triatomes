@@ -2,6 +2,8 @@
 
 [Allison E. Mann, Elizabeth A. Mitchell, Yan Zhang, Rachel Curtis-Robles, Santosh Thapa, Sarah A. Hamer, Michael S. Allen. 2020. Frontiers in Microbiology](https://www.frontiersin.org/articles/10.3389/fmicb.2020.00364/full)
 
+[Download raw sequencing files](https://www.ebi.ac.uk/ena/data/view/PRJEB34484)
+
 ## Supplementary materials
 | File        | Description           |
 | ------------- |:-------------|
