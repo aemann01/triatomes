@@ -1,5 +1,7 @@
 # Comparison of the bacterial gut microbiome of North American *Triatoma* spp. with and without *Trypanosoma cruzi*
 
+[![DOI](https://zenodo.org/badge/199685121.svg)](https://zenodo.org/badge/latestdoi/199685121)
+
 [Allison E. Mann, Elizabeth A. Mitchell, Yan Zhang, Rachel Curtis-Robles, Santosh Thapa, Sarah A. Hamer, Michael S. Allen. 2020. Frontiers in Microbiology](https://www.frontiersin.org/articles/10.3389/fmicb.2020.00364/full)
 
 [Download raw sequencing files](https://www.ebi.ac.uk/ena/data/view/PRJEB34484)
